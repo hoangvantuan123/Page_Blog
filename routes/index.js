@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Article = require('../models/article');
+
 router.get('/', (req, res, next) => {
     return res.render('index.ejs');
 });
-
 
 router.post('/', (req, res, next) => {
     let personInfo = req.body;
@@ -15,7 +15,9 @@ router.post('/', (req, res, next) => {
     } else {
         if (personInfo.password == personInfo.passwordConf) {
 
-            User.findOne({ email: personInfo.email }, (err, data) => {
+            User.findOne({
+                email: personInfo.email
+            }, (err, data) => {
                 if (!data) {
                     let c;
                     User.findOne({}, (err, data) => {
@@ -26,30 +28,27 @@ router.post('/', (req, res, next) => {
                             c = 1;
                         }
 
-                        let newPerson = new User({
-                            unique_id: c,
-                            email: personInfo.email,
-                            username: personInfo.username,
-                            password: personInfo.password,
-                            passwordConf: personInfo.passwordConf
-                        });
+                        let newPerson = new User({unique_id: c, email: personInfo.email, username: personInfo.username, password: personInfo.password, passwordConf: personInfo.passwordConf});
 
                         newPerson.save((err, Person) => {
-                            if (err)
+                            if (err) 
                                 console.log(err);
-                            else
+                            else 
                                 console.log('Success');
-                        });
+                            }
+                        );
 
-                    }).sort({ _id: -1 }).limit(1);
-                    res.send({ "Success": "You are regestered,You can login now." });
+                    })
+                        .sort({_id: -1})
+                        .limit(1);
+                    res.send({"Success": "You are regestered,You can login now."});
                 } else {
-                    res.send({ "Success": "Email is already used." });
+                    res.send({"Success": "Email is already used."});
                 }
 
             });
         } else {
-            res.send({ "Success": "password is not matched" });
+            res.send({"Success": "password is not matched"});
         }
     }
 });
@@ -59,36 +58,43 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    User.findOne({ email: req.body.email }, (err, data) => {
+    User.findOne({
+        email: req.body.email
+    }, (err, data) => {
         if (data) {
 
             if (data.password == req.body.password) {
                 req.session.userId = data.unique_id;
-                res.send({ "Success": "Success!" });
+                res.send({"Success": "Success!"});
             } else {
-                res.send({ "Success": "Wrong password!" });
+                res.send({"Success": "Wrong password!"});
             }
         } else {
-            res.send({ "Success": "This Email Is not regestered!" });
+            res.send({"Success": "This Email Is not regestered!"});
         }
     });
 });
 
-router.get('/profile', async (req, res, next) => {
-    const articles = await Article.find().sort({ createdAt: 'desc' })
-    res.render('articles/index', { articles: articles })
+router.get('/posts', async(req, res, next) => {
+
+    const articles = await Article
+        .find()
+        .sort({createdAt: 'desc'})
+    res.render('articles/index', {articles: articles})
 });
 
 router.get('/logout', (req, res, next) => {
     if (req.session) {
         // delete session object
-        req.session.destroy((err) => {
-            if (err) {
-                return next(err);
-            } else {
-                return res.redirect('/');
-            }
-        });
+        req
+            .session
+            .destroy((err) => {
+                if (err) {
+                    return next(err);
+                } else {
+                    return res.redirect('/');
+                }
+            });
     }
 });
 
@@ -97,23 +103,25 @@ router.get('/forgetpass', (req, res, next) => {
 });
 
 router.post('/forgetpass', (req, res, next) => {
-    User.findOne({ email: req.body.email }, (err, data) => {
+    User.findOne({
+        email: req.body.email
+    }, (err, data) => {
         if (!data) {
-            res.send({ "Success": "This Email Is not regestered!" });
+            res.send({"Success": "This Email Is not regestered!"});
         } else {
             if (req.body.password == req.body.passwordConf) {
                 data.password = req.body.password;
                 data.passwordConf = req.body.passwordConf;
 
                 data.save((err, Person) => {
-                    if (err)
+                    if (err) 
                         console.log(err);
-                    else
+                    else 
                         console.log('Success');
-                    res.send({ "Success": "Password changed!" });
+                    res.send({"Success": "Password changed!"});
                 });
             } else {
-                res.send({ "Success": "Password does not matched! Both Password should be same." });
+                res.send({"Success": "Password does not matched! Both Password should be same."});
             }
         }
     });
