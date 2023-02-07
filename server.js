@@ -58,7 +58,7 @@ app.use(methodOverride('_method'))
 
 
 app.use(express.static(__dirname + '/views'));
-const index = require('./routes/index');
+const index = require('./routes/acc');
 app.use('/', index);
 
 /* app.get('/', async (req, res) => {

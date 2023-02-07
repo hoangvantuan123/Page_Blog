@@ -3,11 +3,23 @@ const router = express.Router();
 const User = require('../models/user');
 const Article = require('../models/article');
 
-router.get('/', (req, res, next) => {
-    return res.render('index.ejs');
+
+
+router.get('/', async(req, res, next) => {
+
+    const articles = await Article
+        .find()
+        .sort({createdAt: 'desc'})
+    res.render('index', {articles: articles})
 });
 
-router.post('/', (req, res, next) => {
+
+
+router.get('/register', (req, res, next) => {
+    return res.render('acc/index');
+});
+
+router.post('/register', (req, res, next) => {
     let personInfo = req.body;
 
     if (!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf) {
@@ -54,7 +66,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
-    return res.render('login.ejs');
+    return res.render('acc/login');
 });
 
 router.post('/login', (req, res, next) => {
@@ -99,7 +111,7 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/forgetpass', (req, res, next) => {
-    res.render("forget.ejs");
+    res.render("acc/forget");
 });
 
 router.post('/forgetpass', (req, res, next) => {
