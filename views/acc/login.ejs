@@ -3,14 +3,13 @@
 
 <head>
 	<title>Login Register App</title>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
 	<link rel="stylesheet" href="../styles/styles.css">
 	<script type="text/javascript">
 		$(document).ready(() => {
-
 			$("#form").submit((event) => {
 				event.preventDefault();
-
 				$.ajax({
 					type: 'POST',
 					url: '/login',
@@ -18,7 +17,6 @@
 					dataType: "json",
 					success: (response) => {
 						$('#form')[0].reset();
-
 						document.getElementById("check").innerHTML = response.Success;
 						//ADD THIS CODE
 						setTimeout(() => {
@@ -31,11 +29,9 @@
 					error: () => {}
 				})
 			});
-
 		});
 	</script>
 </head>
-
 <body class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
 	<!-- <div class="col-md-4 col-md-offset-4 form-card">
 		<div>
@@ -58,52 +54,44 @@
 		<div id="LangTable"><span>Do you want to register a new Account? </span><a href="/">click here</a>
 		</div>
 	</div> -->
-
 	<header class="max-w-lg mx-auto">
 		<a href="#">
 			<h1 class="text-4xl font-bold text-white text-center">Startup</h1>
 		</a>
 	</header>
+	<div class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
 
-	<main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
 		<section>
-			<h3 class="font-bold text-2xl">Welcome to Startup</h3>
-			<p class="text-gray-600 pt-2">Sign in to your account.</p>
+			<h1 class="text-gray-600 pt-2 text-xl text-center">Login</h1>
 		</section>
-
-		<section class="mt-10">
-			<p class="text-center text-3xl">Welcome.</p>
-			<form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
+		<div class="form-group mt-7 ">
+			<form id="form" method="post">
 				<div class="flex flex-col pt-4">
 					<label for="email" class="text-lg">Email</label>
-					<input type="email" id="email" placeholder="your@email.com"
-						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+					<input type="text" name="email"
+						pattern="[-!#$%&'*+\/0-9=?ก-๙A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?ก-๙A-Z^_a-z`{|}~])*@[ก-๙a-zA-Z0-9](-*\.?[ก-๙a-zA-Z0-9])*\.[ก-๙a-zA-Z](-?[ก-๙a-zA-Z0-9])+$"
+						placeholder="E-mail" required=""
+						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline form-control">
 				</div>
-
 				<div class="flex flex-col pt-4">
 					<label for="password" class="text-lg">Password</label>
-					<input type="password" id="password" placeholder="Password"
-						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+					<input type="password" name="password" placeholder="Password" required=""
+						class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline form-control">
 				</div>
-
-				<input type="submit" value="Log In"
-					class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
+				<input type="submit" value="Login"
+					class="bg-black text-white w-full  font-bold  rounded text-lg hover:bg-gray-700 p-2 mt-8">
 			</form>
-			<div class="text-center pt-12 pb-12">
-				<p>Don't have an account? <a href="register.html" class="underline font-semibold">Register here.</a></p>
-			</div>
-		</section>
-	</main>
-
-	<div class="max-w-lg mx-auto text-center mt-12 mb-6">
-		<p class="text-white">Don't have an account? <a href="#" class="font-bold hover:underline">Sign up</a>.</p>
+		</div>
+		<div class="mssg bg-danger mt-4">
+			<span id="check"></span>
+		</div>
+		<div id="LangTable"><a href="/posts" id="aa"></a>
+		</div>
+		<div><span>Bạn quên mật khẩu? </span><a href="/forgetpass">click here</a>
+		</div>
+		<div id="LangTable"><span>Bạn có muốn đăng ký một tài khoản mới? </span><a href="/register">click here</a>
+		</div>
 	</div>
-
-	<footer class="max-w-lg mx-auto flex justify-center text-white">
-		<a href="#" class="hover:underline">Contact</a>
-		<span class="mx-3">•</span>
-		<a href="#" class="hover:underline">Privacy</a>
-	</footer>
 </body>
 
 </html>

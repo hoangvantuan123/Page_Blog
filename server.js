@@ -24,7 +24,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
  */
 
-const MongoDBURI = process.env.MONGO_URI || 'mongodb+srv://admin:1234567890@cluster0.qhjsf8y.mongodb.net/?retryWrites=true&w=majority';
+const MongoDBURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/';
 
 mongoose.connect(MongoDBURI, {
   useUnifiedTopology: true,
