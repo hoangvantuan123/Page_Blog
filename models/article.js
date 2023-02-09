@@ -26,6 +26,7 @@ const articleSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+
   sanitizedHtml: {
     type: String,
     required: true

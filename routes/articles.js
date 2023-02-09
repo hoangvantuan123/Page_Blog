@@ -17,6 +17,7 @@ router.get('/:slug', async (req, res) => {
   res.render('articles/show', { article: article })
 })
 
+
 router.post('/', async (req, res, next) => {
   req.article = new Article()
   next()
