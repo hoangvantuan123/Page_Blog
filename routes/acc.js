@@ -53,14 +53,14 @@ router.post('/register', (req, res, next) => {
                     })
                         .sort({_id: -1})
                         .limit(1);
-                    res.send({"Success": "You are regestered,You can login now."});
+                    res.send({"Success": "Bạn đã được đăng ký lại, Bạn có thể đăng nhập ngay bây giờ."});
                 } else {
-                    res.send({"Success": "Email is already used."});
+                    res.send({"Success": "Email đã được sử dụng."});
                 }
 
             });
         } else {
-            res.send({"Success": "password is not matched"});
+            res.send({"Success": "Mật khẩu không khớp"});
         }
     }
 });
@@ -79,10 +79,10 @@ router.post('/login', (req, res, next) => {
                 req.session.userId = data.unique_id;
                 res.send({"Success": "Success!"});
             } else {
-                res.send({"Success": "Wrong password!"});
+                res.send({"Success": "Sai mật khẩu!"});
             }
         } else {
-            res.send({"Success": "This Email Is not regestered!"});
+            res.send({"Success": "Email này chưa được đăng ký!"});
         }
     });
 });
@@ -119,7 +119,7 @@ router.post('/forgetpass', (req, res, next) => {
         email: req.body.email
     }, (err, data) => {
         if (!data) {
-            res.send({"Success": "This Email Is not regestered!"});
+            res.send({"Success": "Email này chưa được đăng ký!"});
         } else {
             if (req.body.password == req.body.passwordConf) {
                 data.password = req.body.password;
@@ -130,10 +130,10 @@ router.post('/forgetpass', (req, res, next) => {
                         console.log(err);
                     else 
                         console.log('Success');
-                    res.send({"Success": "Password changed!"});
+                    res.send({"Success": "Mật khẩu đã được thay đổi!"});
                 });
             } else {
-                res.send({"Success": "Password does not matched! Both Password should be same."});
+                res.send({"Success": "Mật khẩu không khớp! Cả hai mật khẩu phải giống nhau."});
             }
         }
     });
