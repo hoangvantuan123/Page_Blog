@@ -40,22 +40,7 @@
 </head>
 
 <body>
-    <!--  <div class="container">
-        <h1 class="mb-4">Blog Articles</h1>
-        <% articles.forEach(article => { %>
-        <div class="card mt-4">
-            <div class="card-body">
-                <h4 class="card-title"><%= article.title %></h4>
-                <div class="card-subtitle text-muted mb-2">
-                    <%= article.createdAt.toLocaleDateString() %>
-                </div>
-                <div class="card-text mb-2"><%= article.description %></div>
-
-            </div>
-        </div>
-        <% }) %>
-    </div>
-
+    <!-- 
     <div class="col-md-4 col-md-offset-4 form-card">
         <div>
             <p>Login</p>
@@ -116,7 +101,7 @@
                         <span class="ml-3">Home</span>
                     </a>
                 </li>
-              <!--   <li>
+                <!--   <li>
                     <a href="/"
                         class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <span class="flex-1 ml-3 whitespace-nowrap">Blog</span>
@@ -135,19 +120,22 @@
         <section>
             <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 m-auto">
                 <div class="grid grid-cols-1 gap-y-8  lg:items-center lg:gap-x-16  m-auto">
-
                     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
                         <% articles.forEach(article => { %>
-                        <div class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring">
+                        <div
+                            class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring">
                             <div class="card-body">
                                 <h4 class="mt-2 font-bold"><%= article.title %></h4>
                                 <div class="card-subtitle text-muted mb-2">
                                     <%= article.createdAt.toLocaleDateString() %>
                                 </div>
-                                <div class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600"><%= article.description %></div>
+                                <div class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                                    <%= article.description %></div>
+                               
                             </div>
                         </div>
                         <% }) %>
+
                     </div>
                 </div>
             </div>

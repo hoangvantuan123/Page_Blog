@@ -1,15 +1,17 @@
 <div class="form-group">
-  <label for="title">Title</label>
+  <label for="title">Tiêu đề</label>
   <input required value="<%= article.title %>" type="text" name="title" id="title" class="form-control">
 </div>
 <div class="form-group">
-  <label for="description">Description</label>
+  <label for="description">Mô tả</label>
   <textarea name="description" id="description" class="form-control"><%= article.description %></textarea>
 </div>
 <div class="form-group">
-  <label for="markdown">Markdown</label>
+  <label for="markdown">Đánh dấu</label>
   <textarea required name="markdown" id="markdown" class="form-control"><%= article.markdown %></textarea>
 </div>
 
-<a href="/posts" class="btn btn-secondary">Cancel</a>
-<button type="submit" class="btn btn-primary">Save</button>
+<div class=" mt-4">
+  <a href="/posts" class="btn btn-secondary">Cancel</a>
+  <button type="submit" class="btn btn-primary">Save</button>
+</div>
